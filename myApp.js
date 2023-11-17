@@ -67,6 +67,23 @@ const connectToMongo = async () => {
   }
 };
 
+const { Schema } = mongoose;
+
+const personSchema = new Schema({
+  name:{
+      type: String,
+      required:true},
+  age:{
+          type: Number,
+          
+  },
+  favoriteFoods:{
+          type: [String],
+        
+  },
+});
+
+Person=mongoose.model('person', personSchema);
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
  */
