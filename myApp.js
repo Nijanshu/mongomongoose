@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 
-let Person;
 let mongoose = require('mongoose')
 // const express= require('express');
 
@@ -75,7 +74,7 @@ const personSchema = new Schema({
   favoriteFoods: [String]
 });
 
-Person=mongoose.model('Person', personSchema);
+const Person=mongoose.model('Person', personSchema);
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
  */
