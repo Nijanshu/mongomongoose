@@ -2,6 +2,10 @@ require('dotenv').config();
 
 
 let Person;
+let mongoose = require('mongoose')
+const express= require('express');
+
+let mongoURI= process.env.mongoDBURI
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
@@ -49,6 +53,16 @@ const queryChain = (done) => {
   const foodToSearch = "burrito";
 
   done(null /*, data*/);
+};
+
+const connectToMongo = async () => {
+  try {
+      await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+      } catch (error) {
+      console.error("Error connecting to MongoDB:", error);
+      // Optionally, you can throw the error to stop the application
+      // throw error;
+  }
 };
 
 /** **Well Done !!**
