@@ -1,83 +1,89 @@
 require('dotenv').config();
-const envs = process.env;
-const mongoose = require('mongoose');
-mongoose.connect(envs.mongoDBURI, { useNewUrlParser: true, useUnifiedTopology: true });
+let mongoURI= process.env.mongoDBURI
+
+
+let mongoose = require('mongoose')
+// const express= require('express');
+const connectToMongo = async () => {
+  try {
+      await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+      console.log("Connected to MongoDB")
+      } catch (error) {
+      console.error("Error connecting to MongoDB:", error);
+      // Optionally, you can throw the error to stop the application
+      // throw error;
+  }
+};
+
+
+
+const Schema  = mongoose.Schema;
 
 const personSchema = {
-    name: {
-        type: String,
-        required: true
-    },
-    age: Number,
-    favoriteFoods: [String]
-}
+  name: { type: String, required: true },
+  age: Number,
+  favoriteFoods: [String]
+};
 
 const Person = mongoose.model('Person', personSchema);
-const supermario = new Person({ name: 'Super Mario', age: 40, favoriteFoods: ['Spaghetti'] });
-const luigi = new Person({ name: 'Luigi', age: 24, favoriteFoods: ['Spaghetti'] });
-const arrayOfPeople = [supermario, luigi];
+
 
 const createAndSavePerson = (done) => {
-    supermario.save((err, data) => err ? done(err) : done(null, data));
+  done(null /*, data*/);
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-    Person.create(arrayOfPeople, (err, data) => err ? done(err) : done(null, data));
+  done(null /*, data*/);
 };
 
 const findPeopleByName = (personName, done) => {
-    Person.find({ name: personName }, (err, data) => err ? done(err) : done(null, data));
+  done(null /*, data*/);
 };
 
 const findOneByFood = (food, done) => {
-    Person.findOne({ favoriteFoods: food }, (err, data) => err ? done(err) : done(null, data));
+  done(null /*, data*/);
 };
 
 const findPersonById = (personId, done) => {
-    Person.findById(personId, (err, data) => err ? done(err) : done(null, data));
+  done(null /*, data*/);
 };
 
 const findEditThenSave = (personId, done) => {
-    const foodToAdd = "hamburger";
+  const foodToAdd = "hamburger";
 
-    Person.findById(personId, (err, person) => {
-        if (err) return done(err);
-        person.favoriteFoods.push(foodToAdd);
-        person.save((err, updatedPerson) => (err) ? done(err) : done(null, updatedPerson));
-    })
+  done(null /*, data*/);
 };
 
 const findAndUpdate = (personName, done) => {
-    const ageToSet = 20;
+  const ageToSet = 20;
 
-    Person.findOneAndUpdate({ name: personName }, { age: ageToSet }, { new: true }, (err, updatedPerson) =>
-        (err) ? done(err) : done(null, updatedPerson)
-    )
+  done(null /*, data*/);
 };
 
 const removeById = (personId, done) => {
-    Person.findByIdAndRemove(personId, (err, deletedPerson) => (err) ? done(err) : done(null, deletedPerson))
+  done(null /*, data*/);
 };
 
 const removeManyPeople = (done) => {
-    const nameToRemove = "Mary";
-    Person.remove({ name: nameToRemove }, (err, deletedPersons) => (err) ? done(err) : done(null, deletedPersons))
+  const nameToRemove = "Mary";
+
+  done(null /*, data*/);
 };
 
 const queryChain = (done) => {
-    const foodToSearch = "burrito";
-    Person.find({ favoriteFoods: foodToSearch })
-        .sort({ name: 1 })
-        .limit(2)
-        .select({ age: 0 })
-        .exec((err, deletedPersons) => (err) ? done(err) : done(null, deletedPersons));
+  const foodToSearch = "burrito";
+
+  done(null /*, data*/);
 };
 
+
+
 /** **Well Done !!**
- /* You completed these challenges, let's go celebrate !
+/* You completed these challenges, let's go celebrate !
  */
 
 //----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
+module.exports = connectToMongo;
 
 exports.PersonModel = Person;
 exports.createAndSavePerson = createAndSavePerson;
