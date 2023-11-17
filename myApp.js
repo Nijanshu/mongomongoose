@@ -17,8 +17,13 @@ const supermario = new Person({ name: 'Super Mario', age: 40, favoriteFoods: ['S
 const luigi = new Person({ name: 'Luigi', age: 24, favoriteFoods: ['Spaghetti'] });
 const arrayOfPeople = [supermario, luigi];
 
-const createAndSavePerson = (done) => {
-    supermario.save((err, data) => err ? done(err) : done(null, data));
+var createAndSavePerson = function(done) {
+  var janeFonda = new Person({name: "Jane Fonda", age: 84, favoriteFoods: ["eggs", "fish", "fresh fruit"]});
+
+  janeFonda.save(function(err, data) {
+    if (err) return console.error(err);
+    done(null, data)
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
