@@ -75,7 +75,7 @@ const personSchema = new Schema({
   favoriteFoods: [String]
 });
 
-Person=mongoose.model('person', personSchema);
+Person=mongoose.model('Person', personSchema);
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
  */
