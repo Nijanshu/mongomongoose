@@ -5,8 +5,6 @@
 
 const express = require("express");
 const app = express();
-const connectToMongo = require('./myApp');
-
 let mongoose;
 try {
   mongoose = require("mongoose");
@@ -420,8 +418,7 @@ app.use(function (req, res) {
   }
 });
 
-const listener = app.listen(process.env.PORT || 3000, async function () {
-  await connectToMongo();
+const listener = app.listen(process.env.PORT || 3000, function () {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
