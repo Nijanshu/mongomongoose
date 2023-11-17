@@ -5,6 +5,7 @@ let Person;
 let mongoose = require('mongoose')
 const express= require('express');
 
+
 let mongoURI= process.env.mongoDBURI
 
 const createAndSavePerson = (done) => {
@@ -58,6 +59,7 @@ const queryChain = (done) => {
 const connectToMongo = async () => {
   try {
       await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+      console.log("Connected to MongoDB")
       } catch (error) {
       console.error("Error connecting to MongoDB:", error);
       // Optionally, you can throw the error to stop the application
@@ -70,6 +72,7 @@ const connectToMongo = async () => {
  */
 
 //----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
+module.exports = connectToMongo;
 
 exports.PersonModel = Person;
 exports.createAndSavePerson = createAndSavePerson;
